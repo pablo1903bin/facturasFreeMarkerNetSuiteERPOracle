@@ -97,7 +97,12 @@
         font-size: 8pt;
         }
         table.itemtable th {
-        font-size:11px;
+        font-size:10px;
+        padding-bottom: 4px;
+        padding-top: 4px;
+        }
+        table.itemtable td {
+        font-size:9px;
         padding-bottom: 4px;
         padding-top: 4px;
         }
@@ -179,7 +184,8 @@
          <#if preferences.subsidiaries><img style="height: 90px; width: 140px;" src="${record.custbody_pslad_logo@Url}"/></#if>
       </td>
       <!--Direccion-->
-       <td align="right"  vertical-align="middle" style="width: 459px;">
+       <td align="right" vertical-align="middle" style="width: 459px;">
+         <span style="font-size:16px;">Factura (Ingreso)# ${record.tranid}</span>
            <p text-align="right">
               <span style="font-size:11px;">
                   <span style="font-weight: bold;">${companyinformation.companyname}</span>
@@ -193,33 +199,37 @@
     </tr>
   </table>
   <!--Termina Tabla headder-->
-<!--Tabla del la Factura#-->
-   <table style="width: 100%;"><tr class="document-header-row" style="height: 30px;" width="150px">
-    <td colspan="2" style="font-size: 14px; font-weight: bold; width: 56.4545px;" vertical-align="middle">&nbsp;</td>
-    <td colspan="2" style="width: 1px;">&nbsp;</td>
-    <td colspan="1" style="font-size: 14px; font-weight: bold; width: 250px;" vertical-align="middle"><span style="font-size:16px;">Factura (Ingreso)# ${record.tranid}</span></td>
-    </tr>
-   </table>
-  <!--Termina del la Factura#-->
     <!--Mi Tabla Central -->
   <table cellspacing="2" style="width: 100%; margin-bottom: 5px; border-collapse: collapse; table-layout: fixed;"><tr class="document-header-row" height="20px">
     <td data-darkreader-inline-bgcolor="" style="background-color: rgb(209, 205, 205); --darkreader-inline-bgcolor:#333739;"><strong style="font-size:10px;">Datos del Cliente</strong></td>
     <td data-darkreader-inline-bgcolor="" style="background-color: rgb(209, 205, 205); --darkreader-inline-bgcolor:#333739;"><strong style="font-size:10px;">Comprobante fiscal digital</strong></td>
     </tr>
     <tr class="document-header-row" height="75px">
-    <td border="1" width="38%"><span style="font-weight: bold; font-size: 12px; line-height: 17px;"><#if !record.entity.isperson></span><span style="font-size:10px;"><span style="font-weight: bold; line-height: 17px;">Cliente: </span>${record.entity.companyname}&nbsp;<br />RFC:&nbsp;</span><span style="font-size:9px;">${record.custbody_mx_customer_rfc}</span><br /> <!--<span style="font-size:10px;"><span style="font-weight: bold; line-height: 17px;">SAT Nombre Registrado:<br />SAT Tipo De Industria:</span></span><br />--><span style="font-size:10px;"><span style="font-weight: bold; line-height: 17px;">Direcci&oacute;n:</span></span><span style="font-size:9px;">${record.createdfrom.billaddress}</span><br /><span style="font-size:10px;"><span style="font-weight: bold; line-height: 17px;">No. OIP:</#if>&nbsp;</span></span><span style="font-size:9px;">${record.otherrefnum}</span></td>
+    <td border="1" width="38%">
+      <span style="font-weight: bold; font-size: 12px; line-height: 17px;">
+      <#if !record.entity.isperson></span>
+        <span style="font-size:10px;">
+           <span style="font-weight: bold; line-height: 17px;">Cliente: </span>${record.entity.companyname}&nbsp;<br />RFC:&nbsp;
+        </span>
+        <span style="font-size:9px;">${record.custbody_mx_customer_rfc}</span><br />
+        <span style="font-size:10px;"><span style="font-weight: bold; line-height: 17px;">Direcci&oacute;n:</span></span>
+        <span style="font-size:9px;">${record.createdfrom.billaddress}</span><br />
+        <span style="font-size:10px;"><span style="font-weight: bold; line-height: 17px;">No. OIP:</#if>&nbsp;</span></span>
+         <span style="font-size:9px;">${record.createdfrom.tranid}</span>
+     </td>
      <td style="padding-bottom: 4px;" border="1" width="38%">
        <span style="font-size:9px;padding-bottom: 4px;"><b>Serie:&nbsp; </b>${record.custbody_mx_cfdi_serie}
        <b>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Folio:</b>${record.custbody_mx_cfdi_folio}</span><br />
-       <span style="font-size:9px;padding-bottom: 4px;"><b>Fecha y hora:</b>${certData.custbody_mx_cfdi_certify_timestamp}</span><br />
-       <span style="font-size:9px;padding-bottom: 4px;"><b>Lugar de expedici&oacute;n:</b>${customCompanyInfo.city}</span><br />
-       <span style="font-size:9px; padding-bottom: 4px;"><b>Forma de pago:</b>${record.custbody_mx_txn_sat_payment_method}</span><br />
-       <span style="font-size:9px; padding-bottom: 4px;"><b>Uso de CFDI:</b>${record.custbody_mx_cfdi_usage}</span><br />
-       <span style="font-size:9px; padding-bottom: 4px;"><b>Metodo de pago y cuenta:</b>${record.custbody_mx_txn_sat_payment_term}</span><br />
-       <span style="color:#1abc9c; padding-bottom: 4px;"><span style="font-size:9px; padding-bottom: 4px;">Condiciones:</span></span><span style="font-size:10px;">${record.terms}</span><br />
-       <span style="color:#1abc9c; font-size:9px; "><span >Orden de Compra:</span><!--${record.otherrefnum}-->&nbsp;<br />
-       <span style="color:#1abc9c; padding-bottom: 4px;">Vendedor:</span></span><span style="font-size:10px;">${record.salesrep}</span><br />
-       <span style="color:#1abc9c; padding-bottom: 4px;"><span style="font-size:9px;">No. Proveedor:</span></span>
+       <span style="font-size:9px;padding-bottom: 4px;"><b>Fecha y hora:&nbsp; &nbsp;</b>${certData.custbody_mx_cfdi_certify_timestamp}</span><br />
+       <span style="font-size:9px;padding-bottom: 4px;"><b>Lugar de expedici&oacute;n:&nbsp; &nbsp;</b>${customCompanyInfo.city}</span><br />
+       <span style="font-size:9px; padding-bottom: 4px;"><b>Forma de pago:&nbsp; &nbsp;</b>${record.custbody_mx_txn_sat_payment_method}</span><br />
+       <span style="font-size:9px; padding-bottom: 4px;"><b>Uso de CFDI:&nbsp; &nbsp;</b>${record.custbody_mx_cfdi_usage}</span><br />
+       <span style="font-size:9px; padding-bottom: 4px;"><b>Metodo de pago y cuenta:&nbsp; &nbsp;</b>${record.custbody_mx_txn_sat_payment_term}</span><br />
+       <span style="color:#1abc9c; padding-bottom: 4px;"><span style="font-size:9px; padding-bottom: 4px;">Condiciones:&nbsp; &nbsp;</span></span>
+       <span style="font-size:10px;">${record.terms}</span><br />
+       <span style="color:#1abc9c; font-size:9px; ">Orden de Compra:</span>&nbsp; &nbsp;<span style="font-size:9px;">${record.otherrefnum}&nbsp;</span><br />
+       <span style="color:#1abc9c; padding-bottom: 4px;">Vendedor:&nbsp; &nbsp;</span><span style="font-size:9px;">${record.salesrep}</span><br />
+       <span style="color:#1abc9c; padding-bottom: 4px;"><span style="font-size:9px;">No. Cliente:</span></span>
       </td>
     </tr>
 </table>
@@ -227,42 +237,48 @@
   <!--Mi contenido pendiente el chido **********************************************************************************  -->
 
     <#if custom.items?has_content><!-- if - start items -->
+     
     <table class="itemtable" style="width: 100%; margin-top: 10px;"><!-- table - start items -->
+   
         <#list custom.items as customItem><!-- list - Start items -->
-        <#assign "item" = record.item[customItem.line?number]>
-
-        <#if customItem?index==0>
-        <thead>
+          
+          <#assign "item" = record.item[customItem.line?number]>
+       
+          <#if customItem?index==0>
+          
+          <thead>
             <tr>
                <th width="20px" align="center">${item.quantity@label}</th>
                <th width="30px" align="center">Unidad</th>
                <th width="30px" align="center">Clave SAT</th>
+               <th width="12%" align="center" style="letter-spacing: normal;">Clave De Producto</th>
                <th width="30px" align="center">Articulo</th>
                <th width="30px" align="center">Lote</th>
-              <!--otro medio titulo -->
-                <th width="18px" align="center">P/U</th>
-                <th width="25px" align="center">${item.amount@label}</th>
-                <th width="17px" align="center">IVA</th>
+               <th width="18px" align="center">P/U</th>
+               <th width="25px" align="center">${item.amount@label}</th>
+               <th width="17px" align="center">IVA</th>
             </tr>
-        </thead>
-        </#if>
+          </thead>
+         </#if>
       <!--  Fila de abajo de los titulares-->
-        <tr class="${customItem?item_parity}Row"><!--class="${customItem?item_parity}Row" line-height: 150%;-->
-           <td width="13px" align="center" ><p style="font-size: 10px;">${item.quantity?string["0.0"]}</p></td>
+        <tr class="${customItem?item_parity}Row">
+           <td width="13px" align="center" ><p style="font-size: 10px;">${item.quantity}</p></td>
            <#assign "sat_code" = satCodes.items[customItem.line?number]>
-           <td width="30px" align="center" line-height="150%">${customItem.satUnitCode}</td>
+           <td width="30px" align="center" line-height="150%"><p>${customItem.satUnitCode}</p></td>
            <td width="30px" align="center" line-height="150%">${sat_code.itemCode}</td>
+           <!--Mostrar Clave de producto-->
+           <td width="30px" align="center">${item.item}</td>
            <!--Descripcion del articulo celda extra larga y alta y fea-->
            <td width="60px" height="20px">
-              <p style="font-size: 10px;">${item.description}</p>
-           <!--Termina Descripcion del articulo-->
+              <p style="font-size: 9px;">${item.description}</p>
+         
            </td>
              <!--Numero de Lote-->
            <td width="30px" align="center">
               <#if item.custcol_pslad_inventory_details_json?has_content>
                   <#assign lotjson = item.custcol_pslad_inventory_details_json?eval>
                   <#list lotjson.values as k>
-                       <p style="font-size: 12px;">${k.pslad_lot_number}</p><br />
+                       <p style="font-size: 9px;">${k.pslad_lot_number}</p><br />
                   </#list>
               </#if>
            </td>
@@ -273,10 +289,23 @@
            <td width="17px" align="center">${fmtc(customTaxItem.taxAmount?number?string["0.00"])}</td><!--IVA Valor-->
            </#list>
         </tr>
-        </#list><!-- list - End items -->
+     </#list><!-- list - End items -->
     </table><!-- table - End items -->
+  
     </#if><!-- if - End items -->
-
+      
+      <!--Mi tabla mia personalizada  
+<table border="1" style="width: 100%; margin-top: 10px;">
+  <#list record.taxdetails as key>
+   <tr>
+      <td>${key.linetype}</td>
+   </tr>
+   <tr>
+      <td>${key.linename}</td>
+   </tr>
+    </#list>
+</table>  -->
+   
 <!--Mi contenido pendiente **********************************************************************************  -->
 <#if record.custbody_pslad_complemento_cce?has_content><!-- if - Start complemento de comercio exterior -->
 <table class="itemtable" style="width: 100%; margin-top: 10px;">
