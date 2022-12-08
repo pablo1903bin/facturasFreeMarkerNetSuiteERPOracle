@@ -46,3 +46,23 @@ function suitelet_print(request, response) {
 //  response.writePage(form);
 //  }
 // }
+
+/**
+ * @NApiVersion 2.x
+ * @NScriptType Suitelet
+ */
+ define(["N/ui/serverWidget"], function (serverWidget) {
+   
+  function onRequest(context) {
+       var ifid = request.getParameter('recordid');
+       var file = nlapiPrintRecord('TRANSACTION', ifid, 'PDF', {
+          formnumber: form_internalid
+       });
+       //this will allow you to define the template that will be used to print the invoice
+       response.setContentType('PDF', 'Print Invoice Record', 'INLINE');
+       response.write(file.getValue());
+   }
+  return {
+    onRequest: onRequest,
+  };
+});

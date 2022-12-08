@@ -2,7 +2,7 @@
  * @NApiVersion 2.x
  * @NScriptType Suitelet
  */
- define(["N/ui/serverWidget"], function (serverWidget) {
+define(["N/ui/serverWidget"], function (serverWidget) {
   function suitelet_print(context) {
     if (context.request.method === "GET") {
       var form = serverWidget.createForm({
@@ -60,13 +60,6 @@
   };
 });
 
-
-
-
-
-
-
-
 // /**
 //  * @NApiVersion 2.x
 //  * @NScriptType Suitelet
@@ -94,121 +87,193 @@
  * @NScriptType Suitelet
  */
 // This sample shows how to render search results into a PDF file.
-define(['N/render','N/file','N/record'],
-
-function(render, file , record) {
+define(["N/render", "N/file", "N/record"], function (render, file, record) {
   function onRequest(context) {
+    if (context.request.method == "GET") {
+      function renderizarTemplate() {
+        var ifid = context.request.parameters.recid;
+        log.debug("Mi ifId verdas", ifid);
+        var transactionFile = render.transaction({
+          entityId: 4531,
+          printMode: render.PrintMode.HTML,
+        });
 
-      if (context.request.method == 'GET'){
-            
-               function renderizarTemplate(){
-                  var ifid = context.request.parameters.recid;   
-                  log.debug("Mi ifId verdas",ifid);
-                  var transactionFile = render.transaction({
-                     entityId: 4531,
-                     printMode: render.PrintMode.HTML
-                  });
-              
-                  var fileObj = render.packingSlip({//Me devuelve un archivo en objeto
-                   entityId: 4531,
-                   printMode: render.PrintMode.PDF,
-                     inCustLocale: true
-              });
-                 log.debug("Mi archivo a renderizar",fileObj);
-                 //fileObj.save()
-           
-         }
-        renderizarTemplate();
+        var fileObj = render.packingSlip({
+          //Me devuelve un archivo en objeto
+          entityId: 4531,
+          printMode: render.PrintMode.PDF,
+          inCustLocale: true,
+        });
+        log.debug("Mi archivo a renderizar", fileObj);
+        //fileObj.save()
       }
+      renderizarTemplate();
     }
+  }
   return {
-     onRequest: onRequest
+    onRequest: onRequest,
   };
+});
 
- });
-
-
-
- /**
+/**
  * @NApiVersion 2.x
  * @NScriptType Suitelet
  */
 // Este ejemplo muestra cómo representar los resultados de la búsqueda en un archivo PDF.
-define(['N/render','N/file','N/record','N/ui/serverWidget','N/xml'], function(render, file , record,serverWidget,xml) {
-      
+define([
+  "N/render",
+  "N/file",
+  "N/record",
+  "N/ui/serverWidget",
+  "N/xml",
+], function (render, file, record, serverWidget, xml) {
   function onRequest(context) {
-     if (context.request.method == 'GET') {
-         
-           var serverResponse = context.response; //Gets the response object
-                 
-           var xmlStr = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n" +
-              "<!DOCTYPE pdf PUBLIC \"-//big.faceless.org//report\" \"report-1.1.dtd\">\n" +
-              "<pdf lang=\"ru-RU\" xml:lang=\"ru-RU\">\n" +
-              "<head>\n" +
-              "<link name=\"russianfont\" type=\"font\" subtype=\"opentype\" " +
-              "src=\"NetSuiteFonts/verdana.ttf\" " +
-              "src-bold=\"NetSuiteFonts/verdanab.ttf\" " +
-              "src-italic=\"NetSuiteFonts/verdanai.ttf\" " +
-              "src-bolditalic=\"NetSuiteFonts/verdanabi.ttf\" " +
-              "bytes=\"2\"/>\n" +
-              "</head>\n" +
-              "<body font-family=\"russianfont\" font-size=\"8\">"+
-               '<table  align="center" border="1" cellpadding="2" cellspacing="4" style="width:660px;">'+
-               "<tr>"+
-                 '<td colspan="1" rowspan="1" style="width: 16px;">UNO</td>'+
-                 '<td colspan="26" rowspan="1" style="width: 400px;"><strong style="font-size: 11px;">LIBERACI&Oacute;N DE MATERIA DOSIFICADO</strong></td>'+
-         
-                "</tr>"+
-               "</table>"+
-              "</body>\n" +
-              "</pdf>"; //Test string to be rendered as PDF
-         
-           var filename = 'Orden de Trabajo.pdf'; //Nombre del pdf cuando se descargue
-           serverResponse.setHeader({
-           name: 'Orden-trabajo',
-             value: 'filename="' + filename + '"',
-         }); //sets the filename to the specified format or name
-      
-                var miId = context.request.parameters.recid;
-                var myId = parseInt(miId);
-                var xmlFileContent = file.load('SuiteScripts/TempOrdenTrabajo.xml').getContents();
-                log.debug("contenido cadena file", xmlFileContent);
-                var tip = typeof xmlFileContent;
-                log.debug("tipo d datos del archivo",tip);
-        
-       //cargar un registro 
-       var renderer = render.create();
-         var myContent = renderer.addRecord({
-             templateName: 'record',
-             record: record.load({
-                 type: record.Type.ITEM_FULFILLMENT,
-                 id:4531
-             }),
-         });
-           
-          
-           log.debug("Mi obj de registro", myContent);//********************************************
-    
-      try{
-            //serverResponse.renderPdf({
-         //  xmlString: xmlStr
-       // }); //renders the string as a PDF file
-         //return;
-         
-         // context.response.renderPdf(transactionFile);
-          context.response.writePage(myContent);
-} catch (e) {
-    log.error({
-      title : e.name,
-      details : e.message,
-    });
-  }
-         
-          }
- 
-    }
-   return {
-         onRequest: onRequest
-      };
+    if (context.request.method == "GET") {
+      var serverResponse = context.response; //Gets the response object
 
-     });
+      var xmlStr =
+        '<?xml version="1.0" encoding="UTF-8"?>\n' +
+        '<!DOCTYPE pdf PUBLIC "-//big.faceless.org//report" "report-1.1.dtd">\n' +
+        '<pdf lang="ru-RU" xml:lang="ru-RU">\n' +
+        "<head>\n" +
+        '<link name="russianfont" type="font" subtype="opentype" ' +
+        'src="NetSuiteFonts/verdana.ttf" ' +
+        'src-bold="NetSuiteFonts/verdanab.ttf" ' +
+        'src-italic="NetSuiteFonts/verdanai.ttf" ' +
+        'src-bolditalic="NetSuiteFonts/verdanabi.ttf" ' +
+        'bytes="2"/>\n' +
+        "</head>\n" +
+        '<body font-family="russianfont" font-size="8">' +
+        '<table  align="center" border="1" cellpadding="2" cellspacing="4" style="width:660px;">' +
+        "<tr>" +
+        '<td colspan="1" rowspan="1" style="width: 16px;">UNO</td>' +
+        '<td colspan="26" rowspan="1" style="width: 400px;"><strong style="font-size: 11px;">LIBERACI&Oacute;N DE MATERIA DOSIFICADO</strong></td>' +
+        "</tr>" +
+        "</table>" +
+        "</body>\n" +
+        "</pdf>"; //Test string to be rendered as PDF
+
+      var filename = "Orden de Trabajo.pdf"; //Nombre del pdf cuando se descargue
+      serverResponse.setHeader({
+        name: "Orden-trabajo",
+        value: 'filename="' + filename + '"',
+      }); //sets the filename to the specified format or name
+
+      var miId = context.request.parameters.recid;
+      var myId = parseInt(miId);
+      var xmlFileContent = file
+        .load("SuiteScripts/TempOrdenTrabajo.xml")
+        .getContents();
+      log.debug("contenido cadena file", xmlFileContent);
+      var tip = typeof xmlFileContent;
+      log.debug("tipo d datos del archivo", tip);
+
+      //cargar un registro
+      var renderer = render.create();
+      var myContent = renderer.addRecord({
+        templateName: "record",
+        record: record.load({
+          type: record.Type.ITEM_FULFILLMENT,
+          id: 4531,
+        }),
+      });
+
+      log.debug("Mi obj de registro", myContent); //********************************************
+
+      try {
+        //serverResponse.renderPdf({
+        //  xmlString: xmlStr
+        // }); //renders the string as a PDF file
+        //return;
+
+        // context.response.renderPdf(transactionFile);
+        context.response.writePage(myContent);
+      } catch (e) {
+        log.error({
+          title: e.name,
+          details: e.message,
+        });
+      }
+    }
+  }
+  return {
+    onRequest: onRequest,
+  };
+});
+/////////////////////////////////////////////////addendas 
+
+/**
+ * @NApiVersion 2.x
+ * @NScriptType Suitelet
+ */
+ define(["N/ui/serverWidget"], function (serverWidget) {
+  function suitelet_print(context) {
+      if (context.request.method === "GET") {
+          var form = serverWidget.createForm({
+             title: "Generar Adenda",
+          });
+        
+          //Crear Formulario d opcion multiple
+          var select = form.addField({
+             id: "custpage_selectfield",
+             type: serverWidget.FieldType.SELECT,
+             label: "Selecciona Addenda", //Titulo del formulario
+          });
+         select.addSelectOption({
+            value: "a",
+            text: "Oxxo",
+         });
+         select.addSelectOption({
+            value: "b",
+            text: "Waltmart",
+          });
+         select.addSelectOption({
+           value: "c",
+           text: "Casa Ley",
+          });
+        
+         //Agregarmos un boton que generara la addenda
+         form.addSubmitButton({
+           label: "Generar Addenda",
+         });
+        
+         //Finalmente escribimos el fomrulario en una nueva pagina
+         context.response.writePage(form);
+        
+        
+      }//End if 
+  }//End function context 
+
+ return {
+   onRequest: suitelet_print,
+  };
+});
+
+
+
+//////
+
+ 
+var shipFld = rec.getField({
+  fieldId: 'custrecord_shipping_list'
+ })
+   var options ="oxxo";//shipFld.getSelectOptions()
+ 
+   var select = form.addField({
+  id: 'custpage_selectfield',
+  type: serverWidget.FieldType.SELECT,
+ label: 'My Custom shipping item'
+  });
+   select.addSelectOption({
+      value: '',
+  text: ''
+ });  
+ 
+ 
+for (var i = 0; i < options.length; i++){
+select.addSelectOption({
+  value: options[i].value,
+  text: options[i].text
+});
+}
+ 
