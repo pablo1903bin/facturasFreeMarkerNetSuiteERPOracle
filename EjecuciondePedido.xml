@@ -1,0 +1,297 @@
+<?xml version="1.0"?><!DOCTYPE pdf PUBLIC "-//big.faceless.org//report" "report-1.1.dtd">
+<pdf>
+<head>
+	<link name="NotoSans" type="font" subtype="truetype" src="${nsfont.NotoSans_Regular}" src-bold="${nsfont.NotoSans_Bold}" src-italic="${nsfont.NotoSans_Italic}" src-bolditalic="${nsfont.NotoSans_BoldItalic}" bytes="2" />
+	<#if .locale == "zh_CN">
+		<link name="NotoSansCJKsc" type="font" subtype="opentype" src="${nsfont.NotoSansCJKsc_Regular}" src-bold="${nsfont.NotoSansCJKsc_Bold}" bytes="2" />
+	<#elseif .locale == "zh_TW">
+		<link name="NotoSansCJKtc" type="font" subtype="opentype" src="${nsfont.NotoSansCJKtc_Regular}" src-bold="${nsfont.NotoSansCJKtc_Bold}" bytes="2" />
+	<#elseif .locale == "ja_JP">
+		<link name="NotoSansCJKjp" type="font" subtype="opentype" src="${nsfont.NotoSansCJKjp_Regular}" src-bold="${nsfont.NotoSansCJKjp_Bold}" bytes="2" />
+	<#elseif .locale == "ko_KR">
+		<link name="NotoSansCJKkr" type="font" subtype="opentype" src="${nsfont.NotoSansCJKkr_Regular}" src-bold="${nsfont.NotoSansCJKkr_Bold}" bytes="2" />
+	<#elseif .locale == "th_TH">
+		<link name="NotoSansThai" type="font" subtype="opentype" src="${nsfont.NotoSansThai_Regular}" src-bold="${nsfont.NotoSansThai_Bold}" bytes="2" />
+	</#if>
+    <macrolist>
+        <macro id="nlheader">
+            &nbsp;
+<table class="header" style="width: 673px; font-size: 10pt;"><tr>
+	<td rowspan="3" style="height: 117px;"><br /><br /><span style="font-size:16px;">${record.custbody_pslad_logo}</span></td>
+	<td align="right" style="width: 382px; height: 54px;"><span class="title">Ejecuci&oacute;n de pedido</span></td>
+	</tr>
+	<tr>
+	<td align="right" style="width: 382px;"><span class="number">#${record.tranid}</span></td>
+	</tr>
+	<tr align="right">
+	<td align="right" style="width: 382px;">${record.trandate}</td>
+	</tr></table>
+        </macro>
+        <macro id="nlfooter">
+            <!-- Tabla para las firmas de pie de pagina *********************************************************************   -->
+<table cellspacing="3" style="width: 755px; font-size: 8pt;"><tr>
+	<td colspan="20"><span style="font-size: 12px;">Requerimiento:</span></td>
+	</tr>
+	<tr>
+	<td colspan="20">&nbsp;</td>
+	</tr>
+	<tr>
+	<td colspan="20">&nbsp;</td>
+	</tr>
+	<tr>
+	<td colspan="20">&nbsp;</td>
+	</tr>
+	<tr>
+	<td colspan="20">&nbsp;</td>
+	</tr>
+	<tr>
+	<td align="center" colspan="6" style="padding: 0px;">_______________________________
+	<p style="font-size: 12px;">Responsable de Calidad</p>
+	</td>
+	<td align="center" colspan="6" style="padding: 0px;">_____________________________
+	<p style="font-size: 12px;">Liber&oacute; Documentaci&oacute;n</p>
+	</td>
+	<td align="center" colspan="6" style="padding: 0px; width: 234px;">_____________________________
+	<p style="font-size: 12px;">Liber&oacute;/Supervisor Calidad</p>
+	</td>
+	</tr></table>
+        </macro>
+    </macrolist>
+    <style type="text/css">* {
+		<#if .locale == "zh_CN">
+			font-family: NotoSans, NotoSansCJKsc, sans-serif;
+		<#elseif .locale == "zh_TW">
+			font-family: NotoSans, NotoSansCJKtc, sans-serif;
+		<#elseif .locale == "ja_JP">
+			font-family: NotoSans, NotoSansCJKjp, sans-serif;
+		<#elseif .locale == "ko_KR">
+			font-family: NotoSans, NotoSansCJKkr, sans-serif;
+		<#elseif .locale == "th_TH">
+			font-family: NotoSans, NotoSansThai, sans-serif;
+		<#else>
+			font-family: NotoSans, sans-serif;
+		</#if>
+		}
+
+        th {
+            font-weight: bold;
+            font-size: 8pt;
+            vertical-align: middle;
+            padding: 5px 6px 3px;
+            background-color: #e3e3e3;
+            color: #333333;
+        }
+         th p{align:center}
+        td {
+            padding: 4px 6px;
+        }
+		td p { align:left }
+        b {
+            font-weight: bold;
+            color: #333333;
+        }
+        table.header td {
+            padding: 0;
+            font-size: 10pt;
+        }
+        table.footer td {
+            padding: 0;
+            font-size: 8pt;
+        }
+        table.itemtable th {
+            padding-bottom: 10px;
+            padding-top: 10px;
+        }
+        table.body td {
+            padding-top: 2px;
+        }
+        td.addressheader {
+            font-size: 8pt;
+            font-weight: bold;
+            padding-top: 6px;
+            padding-bottom: 2px;
+        }
+        td.address {
+            padding-top: 0;
+        }
+        span.title {
+            font-size: 28pt;
+        }
+        span.number {
+            font-size: 16pt;
+        }
+        span.itemname {
+            font-weight: bold;
+            line-height: 150%;
+        }
+        div.returnform {
+            width: 100%;
+            /* To ensure minimal height of return form */
+            height: 200pt;
+            page-break-inside: avoid;
+            page-break-after: avoid;
+        }
+        hr {
+            border-top: 1px dashed #d3d3d3;
+            width: 700px;
+            color: #ffffff;
+            background-color: #ffffff;
+            height: 1px;
+        }
+</style>
+<style class="darkreader darkreader--sync" media="screen" type="text/css">
+</style>
+</head>
+<body header="nlheader" header-height="10%" footer="nlfooter" footer-height="50pt" padding="0.5in 0.5in 0.5in 0.5in" size="Letter">
+    &nbsp; <!--
+<table cellpadding="1" cellspacing="1" style="width: 722px;"><tr>
+	<td style="width: 392px; height: 100px;"><span style="font-size:10px;"><strong>Cliente</strong>&nbsp;${record.entity}<br /><br /><strong>${record.shipphone@label}</strong>&nbsp;${salesorder.entity.phone}<br /><br /><strong>Modo de Env&iacute;o</strong>&nbsp;&nbsp;${record.custbody_pslad_metodo_envio_cliente}</span><br /><br /><span style="font-size:10px;"><strong>${salesorder.shipaddress@label}&nbsp; &nbsp; &nbsp;</strong><br />${salesorder.shipaddress}&nbsp; &nbsp;<br /><strong>Orden de Venta:&nbsp;</strong>${salesorder.tranid}</span></td>
+	<td style="width: 319px; height: 100px;"><span style="font-size:10px;"><strong>${salesorder.shipdate@label}</strong>&nbsp;${salesorder.shipdate}<br /><br /><strong>Vendedor&nbsp;</strong>&nbsp;${salesorder.salesrep}&nbsp;<br /><br /><strong>No. de Factura</strong><br /><br /><strong>Hoja de embarque</strong><br /><br /><strong>Gu&iacute;a</strong><br /><br /><strong>Traslado Carta Porte</strong></span></td>
+	</tr></table>-->
+<table border="1" cellpadding="1" cellspacing="2" style="width: 621px; padding-top: 10px;"><tr>
+	<td style="width: 73px;"><strong style="font-size: 10px;">Cliente</strong></td>
+	<td style="width: 221px;">
+	<p style="font-size: 10px;">${record.entity}</p>
+	</td>
+	<td align="right" style="width: 100px;"><strong style="font-size: 10px;">${salesorder.shipdate@label}</strong></td>
+	<td style="width: 117px;">
+	<p style="font-size: 10px;">${salesorder.shipdate}</p>
+	</td>
+	</tr>
+	<tr>
+	<td style="width: 73px;"><strong style="font-size: 10px;">Telefono</strong></td>
+	<td style="width: 221px;">
+	<p style="font-size:10">${salesorder.entity.phone}</p>
+	</td>
+	<td align="right" style="width: 100px;"><strong style="font-size: 10px;">Vendedor</strong></td>
+	<td style="width: 117px;">
+	<p style="font-size: 10px;">${salesorder.salesrep}</p>
+	</td>
+	</tr>
+	<tr>
+	<td style="width: 73px;"><strong style="font-size: 10px;">Modo de Envio</strong></td>
+	<td style="width: 221px;">
+	<p style="font-size: 10px;">${record.custbody_pslad_metodo_envio_cliente}</p>
+	</td>
+	<td align="right" colspan="2" rowspan="3" style="width: 100px;  vertical-align: middle">
+        <table border="1" style="width:300px">
+           <tr>
+		      <td width="100px">Hola</td>
+              <td style="width:100px;">Hola</td>
+		   </tr>
+           <tr>
+		      <td width="100px">Hola</td>
+              <td style="width:100px;">Hola</td>
+		   </tr>
+           <tr>
+		      <td width="100px">Hola</td>
+              <td style="width:100px;">Hola</td>
+		   </tr>
+           <tr>
+		      <td width="100px">Hola</td>
+              <td style="width:100px;">Hola</td>
+		   </tr>
+        </table>
+      <!--
+        <strong style="font-size: 10px;">No. de Factura</strong><br />
+        <strong style="font-size: 10px;">Guia</strong><br />
+        <strong style="font-size: 10px;">Hoja de embarque</strong>-->
+    </td>
+	</tr>
+	<tr>
+	<td style="width: 73px;"><strong style="font-size: 10px;">Orden de Venta</strong></td>
+	<td style="width: 221px;">
+	<p style="font-size:10px;">${salesorder.tranid}</p>
+	</td>
+	</tr>
+	<!--Caja fea-->
+	<tr border="0" style="height: 25px;">
+	<td style="width: 73px;"><strong style="font-size: 10px;">Envio a</strong></td>
+	<td colspan="1" rowspan="1" style="width: 221px;">
+	<p style="font-size: 10px;">${salesorder.shipaddress}</p>
+	</td>
+	</tr>
+	<!--Termina caja fea **********************************************************************-->
+	</table>
+<!--termina mi tabla personalizada--> <#if record.item?has_content>
+
+<table cellpadding="1" cellspacing="1" class="itemtable" style="width: 704px; margin-top: 10px;">
+<thead>
+	<tr style="width: 700px;">
+	<th style="width: 44px; height: 27px;"><span style="font-size:10px;">Cantidad</span></th>
+	<th style="width: 112px; height: 27px;"><span style="font-size:10px;">Art&iacute;culo</span></th>
+	<th colspan="2" style="height: 27px; width: 81px;"><span style="font-size:10px;">Numero de Lote</span></th>
+	</tr>
+</thead>
+<#list record.item as tranline><tr>
+	<td style="width: 10px; height: 27px;">
+	<p>${tranline.quantity}</p>
+	</td>
+	<td align="left" style="width: 112px; height: 27px;"><span class="itemname" style="font-size:12px;">${tranline.item}</span><br /><span style="font-size:6px;">${tranline.description}</span></td>
+	<td colspan="3" rowspan="1" style="width: 187px; height: 27px;"><span class="itemname" style="font-size:12px;">${tranline.inventoryDetail}</span></td>
+	</tr>
+	<tr>
+	<td style="width: 66px; text-align: center; height: 6px;">&nbsp;</td>
+	<td style="width: 52px; text-align: center; height: 6px;">&nbsp;</td>
+	<th colspan="2" style="width: 81px; height: 6px; vertical-align: bottom; text-align: center;"><span style="font-size:9px;">Etiqueta</span></th>
+	<td rowspan="1" style="width: 87px; text-align: center; height: 6px;">&nbsp;</td>
+	<th colspan="2" style="width: 84px; text-align: center; height: 4px; vertical-align: bottom;"><span style="font-size:9px;">Certificado</span></th>
+	<td colspan="4" rowspan="1" style="width: 39px; text-align: center; height: 6px;">&nbsp;</td>
+	</tr>
+	<tr>
+	<th class="titulo2" style="height: 16px;"><span>Cantidad Empaque</span></th>
+	<th style="width: 52px; text-align: center; height: 16px;"><span style="font-size:9px;">Tipo de Empaque</span></th>
+	<th style="width: 35px; height: 16px;"><span style="font-size:9px;">FF</span></th>
+	<th style="width: 31px; text-align: center; height: 16px;"><span style="font-size:9px;">FAB</span></th>
+	<th style="width: 31px; text-align: center; height: 16px;"><span style="font-size:9px;">Empaque</span></th>
+	<th style="width: 35px; text-align: center; height: 16px;"><span style="font-size:9px;">FF</span></th>
+	<th style="width: 35px; text-align: center; height: 16px;"><span style="font-size:9px;">FAB</span></th>
+	<th colspan="3" style="width: 48px; text-align: center; height: 16px;"><span style="font-size:9px;">Fecha de Caducidad</span></th>
+	<th colspan="2" style="width: 63px; text-align: center; height: 16px;"><span style="font-size:9px;">HDS</span></th>
+	</tr>
+	<tr>
+	<td border="1">&nbsp;</td>
+	<td border="1">&nbsp;</td>
+	<td border="1" style="width: 35px;">&nbsp;</td>
+	<td border="1" style="width: 31px;">&nbsp;</td>
+	<td border="1" style="width: 87px;">&nbsp;</td>
+	<td border="1" style="width: 28px;">&nbsp;</td>
+	<td border="1" style="width: 28px;">&nbsp;</td>
+	<td border="1" colspan="3">&nbsp;</td>
+	<td border="1" colspan="2">&nbsp;</td>
+	</tr>
+	</#list></table>
+&nbsp; <!--
+<table border="1" cellpadding="1" cellspacing="1" style="width: 700px;"><tr>
+	<td style="width: 66px; text-align: center;">&nbsp;</td>
+	<td style="width: 52px; text-align: center;">&nbsp;</td>
+	<td colspan="2" rowspan="1" style="width: 62px; text-align: center;"><span style="font-size:9px;">Etiqueta</span></td>
+	<td style="width: 43px; text-align: center;">&nbsp;</td>
+	<td colspan="2" rowspan="1" style="width: 112px; text-align: center;"><span style="font-size:9px;">Certificado</span></td>
+	<td style="width: 57px; text-align: center;">&nbsp;</td>
+	<td style="width: 37px; text-align: center;">&nbsp;</td>
+	</tr>
+	<tr>
+	<th style="width: 66px; text-align: center; height: 1px;"><span style="font-size:9px;">Cantidad Empaque</span></th>
+	<th style="width: 52px; text-align: center; height: 1px;"><span style="font-size:9px;">Tipo de Empaque</span></th>
+	<th style="width: 1px; text-align: center; height: 1px;"><span style="font-size:9px;">FF</span></th>
+	<th style="width: 32px; text-align: center; height: 1px;"><span style="font-size:9px;">FAB</span></th>
+	<th style="width: 43px; text-align: center; height: 1px;"><span style="font-size:9px;">Empaque</span></th>
+	<th style="width: 36px; text-align: center; height: 1px;"><span style="font-size:9px;">FF</span></th>
+	<th style="width: 60px; text-align: center; height: 1px;"><span style="font-size:9px;">FAB</span></th>
+	<th style="width: 57px; text-align: center; height: 1px;"><span style="font-size:9px;">Fecha de Caducidad</span></th>
+	<th style="width: 37px; text-align: center; height: 1px;"><span style="font-size:9px;">HDS</span></th>
+	</tr>
+<tr>
+	<td  border="1" style="width: 66px;">&nbsp;</td>
+	<td  border="1" style="width: 52px;">&nbsp;</td>
+	<td  border="1" style="width: 1px;">&nbsp;</td>
+	<td  border="1" style="width: 32px;">&nbsp;</td>
+	<td  border="1" style="width: 43px;">&nbsp;</td>
+	<td  border="1" style="width: 36px;">&nbsp;</td>
+	<td  border="1" style="width: 60px;">&nbsp;</td>
+	<td  border="1" style="width: 57px;">&nbsp;</td>
+	<td  border="1" style="width: 37px;">&nbsp;</td>
+	</tr></table>--> </#if><#if preferences.RETURNFORM && returnForm??>&nbsp;&nbsp;<br /></#if>
+</body>
+</pdf>
